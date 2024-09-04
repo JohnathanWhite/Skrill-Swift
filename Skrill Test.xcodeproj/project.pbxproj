@@ -12,6 +12,7 @@
 		5B0520952C88B97F006A2AFF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0520942C88B97F006A2AFF /* Item.swift */; };
 		5B0520972C88B980006A2AFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B0520962C88B980006A2AFF /* Assets.xcassets */; };
 		5B05209B2C88B980006A2AFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B05209A2C88B980006A2AFF /* Preview Assets.xcassets */; };
+		5B0520A22C88BA1B006A2AFF /* Webview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0520A12C88BA1B006A2AFF /* Webview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		5B0520962C88B980006A2AFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B0520982C88B980006A2AFF /* Skrill_Test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Skrill_Test.entitlements; sourceTree = "<group>"; };
 		5B05209A2C88B980006A2AFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5B0520A12C88BA1B006A2AFF /* Webview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		5B05208F2C88B97F006A2AFF /* Skrill Test */ = {
 			isa = PBXGroup;
 			children = (
+				5B0520A12C88BA1B006A2AFF /* Webview.swift */,
 				5B0520902C88B97F006A2AFF /* Skrill_TestApp.swift */,
 				5B0520922C88B97F006A2AFF /* ContentView.swift */,
 				5B0520942C88B97F006A2AFF /* Item.swift */,
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B0520932C88B97F006A2AFF /* ContentView.swift in Sources */,
+				5B0520A22C88BA1B006A2AFF /* Webview.swift in Sources */,
 				5B0520952C88B97F006A2AFF /* Item.swift in Sources */,
 				5B0520912C88B97F006A2AFF /* Skrill_TestApp.swift in Sources */,
 			);

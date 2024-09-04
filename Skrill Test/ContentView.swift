@@ -1,66 +1,41 @@
-//
-//  ContentView.swift
-//  Skrill Test
-//
-//  Created by Johnathan White on 9/4/24.
-//
-
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @State private var initialWebView: URL = URL(string: "add invoice url here example -> https://bitpay.com/invoice?v=4&id=U9F1Qa95gxU4xcYomyayam&lang=en-US")! // Initial web view URL
+    @State private var newWebView: URL? // URL for the new web view
+    @State private var isPresentingWebView: Bool = false // Controls when the sheet is shown
+    @State private var closeWebView: Bool = false // Control for closing the second web view
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-#if os(macOS)
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-#endif
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+        VStack {
+            WebView(url: initialWebView, onNewWindow: { url in
+                newWebView = url
+                isPresentingWebView = true
+            }, closeWebView: $closeWebView)
+                .edgesIgnoringSafeArea(.all) // Make the web view full-screen
+
+            .sheet(isPresented: $isPresentingWebView, onDismiss: {
+                newWebView = nil
+            }) {
+                if let newWebViewURL = newWebView {
+                    WebView(url: newWebViewURL, onNewWindow: { _ in }, closeWebView: $closeWebView)
+                        .edgesIgnoringSafeArea(.all)
                 }
             }
-        } detail: {
-            Text("Select an item")
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+        // Close the sheet when the closeWebView flag is set
+        .onChange(of: closeWebView) { shouldClose in
+            if shouldClose {
+                isPresentingWebView = false // Close the sheet
+                closeWebView = false // Reset the flag
             }
         }
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
+
